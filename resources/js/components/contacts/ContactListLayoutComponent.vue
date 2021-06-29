@@ -6,7 +6,7 @@
 			      <div class="container-fluid">
 			        <div class="row mb-2">
 			          <div class="col-sm-6">
-			            <h1 class="m-0">User Page</h1>
+			            <h1 class="m-0">Contact Page</h1>
 			          </div>
 
 			          
@@ -17,7 +17,7 @@
 		          	<div class="col-12">
 		            	<div class="card">
 		              		<div class="card-header">
-		                		<h3 class="card-title">User List</h3>
+		                		<h3 class="card-title">Contact List</h3>
 	                			<div class="card-tools">
 	                  				<div class="input-group input-group-sm" style="width: 250px;">
 	                    				<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -34,19 +34,19 @@
 	                			<table class="table table-bordered text-nowrap">
 	                  				<thead>
 	                    				<tr>
-	                      					<th>ID</th>
+	                      				
 	                      					<th>Email</th>
 	                      					<th>Name</th>
-	                      					<th>Role</th>
+	                      					<th>Number</th>
 	                      					<th>Action</th>
 	                    				</tr>
 	                  				</thead>
 	                  				<tbody>
 	                    				<tr>
-	                      					<td>183</td>
-	                      					<td>John Doe</td>
-	                      					<td>11-7-2014</td>
-	                      					<td><span class="tag tag-success">Approved</span></td>
+	                      					
+	                      					<td></td>
+	                      					<td></td>
+	                      					<td></td>
 	                      					<td>
 	                      						<button class="btn btn-danger btn-xs">
 	                      							<i class="fa fa-trash"></i>
@@ -67,9 +67,9 @@
 		             	 			<div class="float-right">
 					                 
 					                  <div class="btn-group">
-					                    <button type="button" class="btn btn-success btn-md" @click="addUser">
-					                      Add  new user
-					                    </button>
+					                    <router-link to="/addcontact" class="btn btn-success btn-md">
+					                      Add  new contact
+					                    </router-link>
 					                  
 					                  </div>
 					                  <!-- /.btn-group -->
@@ -88,16 +88,12 @@
 
 
 <script>
-	export default{
-		data() {
-      		return {}
-    	},
 
-    	methods : {
-    		addUser(){
-    			this.$router.push('/adduser')
-    		}
-    	}
+
+	
+
+	export default{
+
 
 	};
 </script>

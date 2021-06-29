@@ -31,16 +31,28 @@
            </router-link>
           </li>
 
-          <li class="nav-item">
-            <router-link to="/userpage" :class="[currentPage.includes('userpage') ? 'active' : '', 'nav-link']">
+        <!--   <li class="nav-item ">
+            <router-link to="/userpage" :class="[currentPage.includes('userpage') || currentPage.includes('adduser') ? 'active' : '', 'nav-link']">
                <i class="nav-icon fas fa-users"></i>
               <p>
                Users
               </p>
             </a>
           </router-link>
+        </li>  -->
 
-          <li class="nav-item">
+
+         <li class="nav-item ">
+            <router-link to="/contactpage" :class="[currentPage.includes('contactpage') || currentPage.includes('addcontact') ? 'active' : '', 'nav-link']">
+               <i class="nav-icon fas fa-users"></i>
+              <p>
+               Contacts
+              </p>
+            </a>
+          </router-link>
+        </li> 
+
+          <!-- <li class="nav-item">
             <a href="#" class="nav-link">
                <i class="nav-icon fas fa-clipboard"></i>
               <p>
@@ -58,7 +70,7 @@
               </p>
             </a>
           </li>
-        
+         -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

@@ -14,7 +14,7 @@
 			        </div><!-- /.row -->
 			      </div><!-- /.container-fluid -->
 			    </div>
-				<widget></widget>
+				<!-- <widget></widget> -->
 
 			</div>
 

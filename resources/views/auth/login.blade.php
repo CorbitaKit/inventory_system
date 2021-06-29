@@ -26,7 +26,7 @@
                         <form action="{{ route('login')}}" method="post">
                         @csrf
                         <div class="input-group mb-3 row">
-                            <input placeholder="Email"  id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <input placeholder="Email"  id="email" type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             
                             @error('email')
                                 <span class="invalid-feedback" role="alert">

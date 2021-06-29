@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Inventory System</title>
+	<title>Demo App</title>
+	<meta name="csrf-token" content="{{ csrf_token() }}">	
 	@include('assets.styles')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
