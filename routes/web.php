@@ -21,6 +21,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/dashboard','DashboardController@index')->name('dashboard');
 
 
-Route::get('{any}', function () {
-    return view('dashboard.dashboard');
-})->where('any','.*');
+// Route::get('{any}', function () {
+//     return view('dashboard.dashboard');
+// })->where('any','.*');
