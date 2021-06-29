@@ -42,17 +42,17 @@
 	                    				</tr>
 	                  				</thead>
 	                  				<tbody>
-	                    				<tr>
+	                    				<tr v-for="(contact, idx) in contacts">
 	                      					
-	                      					<td></td>
-	                      					<td></td>
-	                      					<td></td>
+	                      					<td>{{ contact.firstname}} {{ contact.lastname }}</td>
+	                      					<td>{{ contact.number }}</td>
+	                      					<td>{{ contact.email}}</td>
 	                      					<td>
 	                      						<button class="btn btn-danger btn-xs">
 	                      							<i class="fa fa-trash"></i>
 	                      						</button>
 
-	                      						<button class="btn btn-primary btn-xs">
+	                      						<button class="btn btn-primary btn-xs" @click="updateContact(contact.id)">
 	                      							<i class="fa fa-edit"></i>
 	                      						</button>
 	                      					</td>
@@ -89,11 +89,36 @@
 
 <script>
 
-
+	import {mapGetters,mapActions} from 'vuex';
 	
 
 	export default{
 
+		computed : {
+			...mapGetters({
+				contacts : "getAllContact"
+			})
+		},
+
+		created(){
+			this.getContacts();
+		},
+
+		methods : {
+			...mapActions(["fetchContacts","fetchContact"]),
+
+			getContacts(){
+				this.$store.dispatch("fetchContacts")
+			},
+
+			updateContact(id){
+				this.$store.dispatch("fetchContact",id)
+
+				this.$router.push('/addcontact')
+			}
+
+
+		}
 
 	};
 </script>

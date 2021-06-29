@@ -18,7 +18,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware('auth:api')->group(function(){
+// Route::middleware('auth:api')->group(function(){
 
-	Route::post('/storeUser','UserController@store');
-});
+// 	// Route::post('/storeUser','UserController@store');
+
+
+// });
+
+
+Route::post('/storecontact','ContactController@store');
+
+Route::get('/getcontacts','ContactController@getContacts');
+
+Route::get('/getcontact/{contact_id}','ContactController@getContact');
