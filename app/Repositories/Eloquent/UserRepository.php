@@ -10,20 +10,19 @@
 		private $model;
 
 		public function __construct(User $user){
-			$this->model = $user;
+			$this->model = new User;
 		}
 
 
 		public function store($data){
-			$user = new User;
+			
+			return $this->model->create([
+				'name'  => ucfirst($data->firstname).' '.ucfirst($data->lastname),
+				'email' => $data->email,
+				'password' => Hash::make($data->password),
+				'role_id' => $data->role_id
 
-			$user->name = ucfirst($data->firstname).' '.ucfirst($data->lastname);
-			$user->email = $data->email;
-			$user->password = Hash::make($data->password);
-
-			$user->save();
-
-			return $user;
+			]);
 		}
 
 		public function find($id){
@@ -40,6 +39,12 @@
 
 		public function destroy($id){
 			$this->model->find($id)->delete();
+		}
+
+		public function get(){
+			$user = $this->model->with('role')->get();
+
+			return $user;
 		}
 	} 
 

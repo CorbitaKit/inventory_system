@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,24 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|unique:users',
+            'password' =>  'required',
+            'role_id' => 'required'
+        ];
+    }
+
+    public function messages(){
+        return [
+
+            'firstname.required' => 'Firstname field is required',
+            'lastname.required' => 'Lastname field is required',
+            'email.required' => 'Email field is required',
+            'email.unique' => 'This email is already registered',
+            'password.required' => 'Password field is  required',
+            'role_id.required' => 'Role field is required',
+
         ];
     }
 }

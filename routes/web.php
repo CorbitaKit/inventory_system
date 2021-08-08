@@ -15,12 +15,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/dashboard','DashboardController@index')->name('dashboard');
+// Auth::routes();
+
+Route::middleware("auth")->group(function(){
+	
+	
+	Route::get('/dashboard','DashboardController@index')->name('dashboard');
+
+
+});
+
+Route::middleware('web')->group(function(){
+	// Auth::routes();
+	Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+	Route::post('login', 'Auth\LoginController@login');
+	Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+});
 
 
 Route::get('{any}', function () {
+
     return view('dashboard.dashboard');
 })->where('any','.*');

@@ -2,72 +2,76 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import api from 'axios';
 
+import Swal from 'sweetalert2'
 Vue.use(Vuex)
-
 
 
 
 export const store = new Vuex.Store({
 
 	state : {
-		contact : {
+		user : {
 			firstname : '',
 			lastname : '',
 			email : '',
-			phone : ''
+			password : '',
+			role_id : ''
 		},
-		contacts : [],
+
+		roles : [],
+		users : [],
 	},
 
 	mutations : {
 
-		addNewContact(state,payload){
+		setUsers : (state,payload)=>{
 
-			// console.log(payload)
-			state.contacts.push(payload)
+			
+			state.users = payload
 		},
 
-		getContacts(state,payload){
-
-			state.contacts = payload
+		setRoles : (state,payload)=>{
+			state.roles = payload
 		},
 
-
-		setContact(state,payload){
-			state.contact = payload
+		setUsers : (state,payload)=>{
+			state.users = payload
 		}
+
+		
 	},
 
 
 	actions : {
 
-		async addAction(state,payload){
+		async fetchRoles(context, payload){
 
+			const response = await api.get('/api/get-roles')
 
-			const new_contact = await axios.post('/api/storecontact',payload)
-
-			state.commit("addNewContact",new_contact)
+			context.commit('setRoles',response.data)
 		},
 
-		async fetchContacts(state){
-			const response = await axios.get('/api/getcontacts')
 
-			state.commit('getContacts',response.data)
+		async saveUser(context,payload){
+			const response  = await api.post('/api/store-user',payload)
+			return response
 		},
 
-		async fetchContact(state,payload){
-			const contact = await axios.get('/api/getcontact/'+payload)
-			state.commit("setContact",contact.data)
+		async fetchUsers(context){
+			api.get('/api/get-users')
+			.then(response=>{
+				context.commit('setUsers',response.data)
+			})
 		}
 
 
+		
 	},
 
-
 	getters : {
-
-		getContact : state => state.contact,
-		getAllContact : state => state.contacts
+		getUser : state => state.user,
+		getUsers  : state=>  state.users,
+		getRoles : state=>state.roles
+		
 	}
-
 });

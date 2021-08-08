@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 //Components
 import DashboardLayout from './components/dashboard/DashboardLayoutComponent.vue'
-import ContactListLayout from './components/contacts/ContactListLayoutComponent.vue'
-import AddNewContactLayout from './components/contacts/AddnewContactLayoutComponent.vue'
+import UserPageLayout from './components/dashboard/User/UserLayoutComponent.vue'
+import AddNewUserLayout from './components/dashboard/User/AddUserLayoutComponent.vue'
 
 
 
@@ -19,12 +19,12 @@ const routes = [
 
 	},
 	{
-		path : '/contactpage',
-		component : ContactListLayout
+		path : '/userpage',
+		component : UserPageLayout
 	},
 	{
-		path : '/addcontact',
-		component : AddNewContactLayout,
+		path : '/adduser',
+		component : AddNewUserLayout,
 		props : true
 	}
 

@@ -37,7 +37,7 @@
                   				<div class="col-md-6">
                   					<div class="form-group">
 		                    			<el-form-item label="Email Address">
-		                    				<el-input placeholder="Please input. email address" v-model="user.email"></el-input>
+		                    				<el-input placeholder="Please input email address" v-model="user.email"></el-input>
 		                    			</el-form-item>
 		                  			</div>
                   				</div>
@@ -46,9 +46,27 @@
                   					<div class="form-group">
                   						<el-form-item label="Password">
 			                    			
-		                    				<el-input disabled v-model="user.password">
-		                    					<el-button slot="append" icon="el-icon-view"></el-button>
+		                    				<el-input v-model="user.password" :type="pwType" placeholder="Please input password"> 
+		                    					<el-button slot="append" icon="el-icon-view" @click="showPassword"></el-button>
 		                    				</el-input>
+
+		                  				</el-form-item>
+		                  			</div>
+                  				</div>
+                  			</div>
+                  			<div class="row">
+                  				<div class="col-md-6">
+                  					<div class="form-group">
+                  						<el-form-item label="Role">
+			                    			
+		                    				<el-select v-model="user.role_id" placeholder="Select">
+											    <el-option
+											      v-for="role in roles"
+											      :key="role.value"
+											      :label="role.label"
+											      :value="role.value">
+											    </el-option>
+											  </el-select>
 
 		                  				</el-form-item>
 		                  			</div>
@@ -58,7 +76,7 @@
                 		<div class="card-footer">
                   			<div class="float-right">
                   				<router-link to="/userpage" class="btn btn-danger">Cancel</router-link>
-                  				<button type="button" class="btn btn-primary" @click="addUser">Submit</button>
+                  				<button type="button" class="btn btn-primary" @click="storeUser">Submit</button>
                   			</div>
                 		</div>
               		</el-form>
@@ -73,18 +91,71 @@
 <script>
 
 	import {mapGetters,mapActions} from 'vuex'
-	
+	import Swal from 'sweetalert2'
+
+
 	export default{
+
+		data(){
+			return {
+				
+				pwType : 'password'
+			}
+		},
+
+		created(){
+			this.getRoles()
+			
+		},
 
 		computed : {
 			...mapGetters({
 				user : 'getUser',
+				roles : 'getRoles',
 			})
 		},
 		methods : {
 			...mapActions({
-				addUser : 'addUser'
-			})
+				saveUser  : 'saveUser',
+				getRoles : 'fetchRoles',
+
+			}),
+
+			async storeUser(){
+
+			
+
+				const res = this.saveUser(this.user)
+				
+				res.then(response=>{
+
+					Swal.fire('success','User created successfully','success')
+
+					this.$router.push('/userpage')
+				}).catch(err=>{
+
+					console.log(err.messages)
+
+					Swal.fire('error','Please fill all fields','error')
+				})
+
+				
+
+				
+			},
+
+		
+			showPassword(){
+
+				this.pwType = this.pwType === 'password' ? 'text' : 'password'
+			},
+
+		
 		}
 	};
 </script>
+<style scoped>
+	.el-select{
+		width : 100% !important;
+	}
+</style>

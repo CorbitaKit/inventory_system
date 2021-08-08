@@ -42,11 +42,11 @@
 	                    				</tr>
 	                  				</thead>
 	                  				<tbody>
-	                    				<tr>
-	                      					<td>183</td>
-	                      					<td>John Doe</td>
-	                      					<td>11-7-2014</td>
-	                      					<td><span class="tag tag-success">Approved</span></td>
+	                    				<tr v-for="(user, i) in users">
+	                      					<td>{{ user.id }}</td>
+	                      					<td>{{ user.email}}</td>
+	                      					<td>{{ user.name }}</td>
+	                      					<td><span class="tag tag-success">{{ user.role.name }}</span></td>
 	                      					<td>
 	                      						<button class="btn btn-danger btn-xs">
 	                      							<i class="fa fa-trash"></i>
@@ -88,12 +88,30 @@
 
 
 <script>
+
+	import {mapGetters,mapActions} from 'vuex'
+
+
 	export default{
 		data() {
       		return {}
     	},
 
+    	computed : {
+    		...mapGetters({
+    			users : 'getUsers'
+    		})
+    	},
+
+    	created(){
+    		this.fetchUsers()
+    	},
+
     	methods : {
+
+    		...mapActions({
+    			fetchUsers : 'fetchUsers'
+    		}),
     		addUser(){
     			this.$router.push('/adduser')
     		}

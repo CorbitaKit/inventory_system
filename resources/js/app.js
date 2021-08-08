@@ -3,6 +3,8 @@ import GlobalImport from './plugins/global-import.js'
 import {store} from './store';
 
 
+
+
 require('./bootstrap');
 
 window.Vue = require('vue');

@@ -19,8 +19,26 @@ class UserController extends Controller{
 
 
 	public function store(UserRequest $request){
+		$validated = $request->validated();
 
-		return $this->userRepository->store($request);
+		if($validated){
+
+			$this->userRepository->store($request);
+			return response('created',201);
+		}
+
+		
+
+
+		
+	}
+
+	public function get(){
+
+		$users = $this->userRepository->get();
+
+
+		return response(json_encode($users),200);
 	}
     
 }

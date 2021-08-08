@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\User;
+use App\Role;
 class UserTableSeeder extends Seeder
 {
     /**
@@ -12,10 +13,15 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-       User::create([
+
+        $admin_role = Role::where("name","parish priest")->first();
+
+
+        User::create([
         	"name" => "Admin",
         	"email" => "admin@sample.com",
-        	"password" => Hash::make("admin123")
+        	"password" => Hash::make("admin123"),
+            "role_id" => $admin_role->id
         ]);
     }
 }
