@@ -38,11 +38,17 @@
 		}
 
 		public function destroy($id){
-			$this->model->find($id)->delete();
+			return $this->model->findOrFail($id);
 		}
 
 		public function get(){
-			$user = $this->model->with('role')->get();
+			$users = $this->model->with('role')->get();
+
+			return $users;
+		}
+
+		public function getWhere($user_id){
+			$user = $this->model->with('role')->where('id',$user_id)->first();
 
 			return $user;
 		}

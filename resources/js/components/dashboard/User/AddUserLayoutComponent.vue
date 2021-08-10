@@ -76,7 +76,7 @@
                 		<div class="card-footer">
                   			<div class="float-right">
                   				<router-link to="/userpage" class="btn btn-danger">Cancel</router-link>
-                  				<button type="button" class="btn btn-primary" @click="storeUser">Submit</button>
+                  				<button type="button" class="btn btn-primary" @click="storeUser">{{ text }}</button>
                   			</div>
                 		</div>
               		</el-form>
@@ -99,12 +99,20 @@
 		data(){
 			return {
 				
-				pwType : 'password'
+				pwType : 'password',
+				text : 'Submit',
+				is_update : false,
 			}
 		},
 
 		created(){
 			this.getRoles()
+
+			if(this.user.id){
+
+				this.is_update =  true
+				this.text = 'Update'
+			}
 			
 		},
 
@@ -146,12 +154,11 @@
 
 		
 			showPassword(){
-
 				this.pwType = this.pwType === 'password' ? 'text' : 'password'
 			},
+		},
 
-		
-		}
+
 	};
 </script>
 <style scoped>

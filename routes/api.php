@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-
+//User  route
 
 Route::post('/store-user','UserController@store');
 
@@ -26,3 +26,16 @@ Route::post('/store-user','UserController@store');
 Route::get('/get-roles','RolesController');
 
 Route::get('/get-users','UserController@get');
+
+Route::delete('/delete-user/{user_id}','UserController@destroy');
+
+Route::get('/get-user/{user_id}','UserController@edit');
+
+
+
+//Item route
+
+
+Route::post('/store-item','ItemController@store');
+
+Route::get('/get-items','ItemController@getItems');

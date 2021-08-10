@@ -35,7 +35,4 @@ Route::middleware('web')->group(function(){
 });
 
 
-Route::get('{any}', function () {
-
-    return view('dashboard.dashboard');
-})->where('any','.*');
+Route::get('{any}', "DashboardController@index")->where('any','.*');

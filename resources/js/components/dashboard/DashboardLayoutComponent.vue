@@ -34,14 +34,15 @@
 		},
 
 		created(){
-			// this.init()
-			this.roles()
+			this.getUserLoggedIn()
+			
 		},
 
 		methods : {
 			...mapActions({
 				users : 'setUsers',
 				roles : 'fetchRoles',
+				getUserLoggedIn : 'getUserLoggedIn'
 			}),
 
 			init(){

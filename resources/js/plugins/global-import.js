@@ -11,6 +11,7 @@ const GlobalImports = {
 	install(vue){
 		Vue.use(ElementUI, {locale})
 		Vue.use(requestService)
+
 	}
 }
 

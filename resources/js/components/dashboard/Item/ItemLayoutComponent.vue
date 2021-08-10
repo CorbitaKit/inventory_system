@@ -6,7 +6,7 @@
 			      <div class="container-fluid">
 			        <div class="row mb-2">
 			          <div class="col-sm-6">
-			            <h1 class="m-0">User Page</h1>
+			            <h1 class="m-0">Item Page</h1>
 			          </div>
 
 			          
@@ -17,7 +17,7 @@
 		          	<div class="col-12">
 		            	<div class="card">
 		              		<div class="card-header">
-		                		<h3 class="card-title">User List</h3>
+		                		<h3 class="card-title">Item List</h3>
 	                			<div class="card-tools">
 	                  				<div class="input-group input-group-sm" style="width: 250px;">
 	                    				<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -35,24 +35,26 @@
 	                  				<thead>
 	                    				<tr>
 	                      					<th>ID</th>
-	                      					<th>Email</th>
 	                      					<th>Name</th>
-	                      					<th>Role</th>
-	                      					<th v-if="userLoggedIn.role.name  ==  'parish priest'">Action</th>
+	                      					<th>Date Arrive</th>
+	                      					<th>Quantity</th>
+	                      					<th>Price</th>
+	                      					<th>Actions</th>
 	                    				</tr>
 	                  				</thead>
 	                  				<tbody>
-	                    				<tr v-for="(user, i) in users">
-	                      					<td>{{ user.id }}</td>
-	                      					<td>{{ user.email}}</td>
-	                      					<td>{{ user.name }}</td>
-	                      					<td><span class="tag tag-success">{{ user.role.name }}</span></td>
-	                      					<td v-if="userLoggedIn.role.name  ==  'parish priest'">
-	                      						<button class="btn btn-danger btn-xs" @click='removeUser(user.id)'>
+	                    				<tr v-for="(item,i) in items" :index="i">
+	                      					<td> {{ item.id }} </td>
+	                      					<td>{{ item.name }}</td>
+	                      					<td>{{ item.date_arrive }}</td>
+	                      					<td>{{ item.quantity }} {{ item.utility }}</td>
+	                      					<td>{{ item.price}}</td>
+	                      					<td>
+	                      						<button class="btn btn-danger btn-xs">
 	                      							<i class="fa fa-trash"></i>
 	                      						</button>
 
-	                      						<button class="btn btn-primary btn-xs" @click="editUser(user.id)">
+	                      						<button class="btn btn-primary btn-xs">
 	                      							<i class="fa fa-edit"></i>
 	                      						</button>
 	                      					</td>
@@ -67,9 +69,9 @@
 		             	 			<div class="float-right">
 					                 
 					                  <div class="btn-group">
-					                    <button type="button" v-if="userLoggedIn.role.name == 'parish priest'" class="btn btn-success btn-md" @click="addUser">
-					                      Add  new user
-					                    </button>
+					                    <router-link to="/additem" class="btn btn-success">Add new item</router-link>
+
+
 					                  
 					                  </div>
 					                  <!-- /.btn-group -->
@@ -99,64 +101,19 @@
 
     	computed : {
     		...mapGetters({
-    			users : 'getUsers',
-    			userLoggedIn : 'getUserLoggedIn'
+    			items : 'getItems'
     		})
     	},
 
     	created(){
-    		this.fetchUsers()
-
-    		console.log(this.userLoggedIn.role.name)
+    		this.fetchItems()
     	},
 
+    	
     	methods : {
-
     		...mapActions({
-    			fetchUsers : 'fetchUsers',
-    			deleteUser : 'deleteUser',
-    			fetchUser : 'fetchUser',
-    		}),
-    		addUser(){
-    			this.$router.push('/adduser')
-    		},
-
-    		removeUser(user_id){
-
-    			Swal.fire({
-				  title: 'Are you sure?',
-				  text: "You won't be able to revert this!",
-				  icon: 'warning',
-				  showCancelButton: true,
-				  confirmButtonColor: '#3085d6',
-				  cancelButtonColor: '#d33',
-				  confirmButtonText: 'Yes, delete it!'
-				}).then((result) => {
-				  if (result.isConfirmed) {
-				   
-
-				    const res = this.deleteUser(user_id);
-
-				    res.then(response=>{
-				    	 Swal.fire(
-					      'Deleted!',
-					      'Your user has been deleted.',
-					      'success'
-					    )
-
-				    	this.fetchUsers()
-				    })
-				  }
-				})
-    		},
-
-    		editUser(id){
-    			const res = this.fetchUser(id)
-
-    			res.then(response=>{
-    				this.$router.push('/adduser')
-    			})
-    		}
+    			fetchItems : 'fetchItems'
+    		})
     	}
 
 	};

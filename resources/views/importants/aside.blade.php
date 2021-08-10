@@ -10,6 +10,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
+          <input type="hidden" value="{{ $user}}" id="user">
         </div>
       </div>
 
@@ -53,12 +54,13 @@
         </li> 
  -->
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <router-link to="/itempage" :class="[currentPage.includes('itempage') || currentPage.includes('additem') ? 'active' : '', 'nav-link']">
                <i class="nav-icon fas fa-clipboard"></i>
               <p>
                Items
               </p>
             </a>
+          </router-link>
           </li>
 
 

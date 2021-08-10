@@ -14,6 +14,8 @@
 		public function destroy($id);
 
 		public function get();
+
+		public function getWhere($id);
 	}
 
 

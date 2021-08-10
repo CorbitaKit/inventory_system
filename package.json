@@ -27,6 +27,7 @@
     "dependencies": {
         "element-ui": "^2.15.2",
         "sweetalert2": "^11.0.19",
+        "vee-validate": "^2.2.15",
         "vuex": "^3.6.2"
     }
 }
